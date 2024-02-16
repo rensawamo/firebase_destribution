@@ -5,7 +5,6 @@ on:
     branches:
       - 'main'
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,14 +18,29 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.19.0'
-
+          flutter-version: '3.16.9'
+#      - name: Translate secrets of base64 into json
+#        env:
+#          GOOGLE_SERVICE: ${{ secrets.ANDROID_GOOGLE_SERVICE }}
+#        run:
+#            echo $GOOGLE_SERVICE | base64 --decode > ./android/app/google-services.json
+      - name: Create key
+        run: |
+          echo ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > android/release.jks
+          echo 'storeFile=release.jks' > android/key.properties
+          echo 'storePassword=${{ secrets.STORE_PASSWORD }}' >> android/keystore.properties
+          echo 'keyPassword=${{ secrets.KEY_PASSWORD }}' >> android/keystore.properties
+          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/keystore.properties
       - name: Build APK
-        env:
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        run: flutter build apk
+        run: |
+           flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
+#      - name: Build APK
+#        env:
+#          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+#          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+#          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+#            - name: Run
+#                run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./release.jks
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
