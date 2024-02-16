@@ -26,7 +26,7 @@ jobs:
       - name: Flutter Doctor
         run: flutter doctor -v
       - name: Flutter Pub Get with Verbose
-        run: flutter pub get --verbose
+        run: flutter pub get
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Run
@@ -39,7 +39,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: |
-          flutter build apk
+          flutter build apk --release
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
