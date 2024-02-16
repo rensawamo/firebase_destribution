@@ -14,6 +14,7 @@ fvm use stable
 *.jks
 *.pem
 **/.fvm/flutter_sdk
+**/lib/firebase_options.dart
 ```
 
 ## アップロードkeyの準備
@@ -129,6 +130,25 @@ firebase login コマンドなどを順番に実行し、プロジェクトに f
 ```sh
 flutter pub get
 ```
+
+## github actionのセットアップ
+setting  →   Secrets and Variables   から 環境変数を設定
+
+![image](https://github.com/rensawamo/firebase_destribution/assets/106803080/0f604f02-00ea-442c-a70c-cff2d87c555a)
+
+- APPID   ＝ firebaseの アプリID
+- FIREBASE_OPTIONS  ＝ lib/firebase_options.dartの内容
+- GOOGLE_SERVICES_JSON  ＝ android/app/google-services.jsonの内容
+- TOKEN  ＝ 
+以下のコマンドを実行したときの+  Success! Use this token to login on a CI server: の下がTokenとなる
+```sh
+firebase login:ci
+```
+
+
+
+
+
 
 
 
