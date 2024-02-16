@@ -20,7 +20,13 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.x'
+          flutter-version: '3.16.9'
+      - name: Clean Flutter
+        run: flutter clean
+      - name: Flutter Doctor
+        run: flutter doctor -v
+      - name: Flutter Pub Get with Verbose
+        run: flutter pub get --verbose
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Run
