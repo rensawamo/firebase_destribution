@@ -13,6 +13,7 @@ fvm use stable
 **/android/app/google-services.json
 *.jks
 *.pem
+**/.fvm/flutter_sdk
 ```
 
 ## アップロードkeyの準備
