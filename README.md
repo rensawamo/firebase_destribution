@@ -1,16 +1,14 @@
 # firebase_destribution
 
-A new Flutter project.
+### fvm 設定で行う場合の追加
+``` sh
+fvm use stable
+```
 
-## Getting Started
+### gitigonre の更新
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+以下で firebaseの設定やAPIのファイルをgitで公開しないようにする
+```sh
+**/ios/Runner/GoogleService-Info.plist
+**/android/app/google-services.json
+```
