@@ -59,7 +59,7 @@ android {
         release {
 
             if (System.getenv("GITHUB_ACTIONS")) { // CI=true is exported by gitaction
-                storeFile file("android/app/release.jks")
+                storeFile file("release.jks")
                 storePassword System.getenv()["STORE_PASSWORD"]
                 keyAlias System.getenv()["KEY_ALIAS"]
                 keyPassword System.getenv()["KEY_PASSWORD"]
