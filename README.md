@@ -26,6 +26,11 @@ alias_nameは覚えやすい名前にする
 keytool -genkey -v -keystore release.jks -alias alias_name -keyalg RSA -keysize 2048 -validity 10000****
 ```
 
+### github actionの環境変数で使うためエンコードしておく
+```sh
+ openssl base64 -in release.jks  -out release.pem 
+```
+
 ### android/keystore.propertiesを作成
 ```sh
 storePassword=パスワード
