@@ -37,7 +37,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: |
-          flutter build apk --release --no-sound-null-safety
+          flutter build apk
       - name: build release
         run: ./gradlew assembleRelease
       - name: upload artifact to Firebase App Distribution
