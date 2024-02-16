@@ -34,7 +34,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/release.jks
       - name: Decode firebase_option
         env:
-        firebase_options_dart: ${{secrets.FIREBASE_OPTION}}
+          firebase_options_dart: ${{secrets.FIREBASE_OPTION}}
         run: echo "$firebase_options_dart" > lib/firebase_options.dart
       - name: Build APK
         env:
