@@ -150,7 +150,6 @@ app.*.symbols
 !default.code-workspace
 .melos_tool/*
 
-
 # fvm
 **/.fvm/flutter_sdk
 
@@ -159,3 +158,6 @@ pubspec_overrides.yaml
 
 # mason
 .mason
+
+# FVM Version Cache
+.fvm/
