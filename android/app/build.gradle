@@ -58,8 +58,8 @@ android {
     signingConfigs {
         release {
 
-            if ("true".equals(System.getenv("GITHUB_ACTIONS"))) { // CI=true is exported by gitaction
-                storeFile file(System.getenv()["KEYSTORE_BASE64"] + "/release.jks")
+            if (System.getenv("GITHUB_ACTIONS")) { // CI=true is exported by gitaction
+                storeFile file("android/app/release.jks")
                 storePassword System.getenv()["STORE_PASSWORD"]
                 keyAlias System.getenv()["KEY_ALIAS"]
                 keyPassword System.getenv()["KEY_PASSWORD"]

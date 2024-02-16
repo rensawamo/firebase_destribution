@@ -44,12 +44,12 @@ class _testState extends State<Test> {
           ),
           centerTitle: true,
         ),
-        body: Center(
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("init"),
-              const Text("firebase destribution")
+              Text("init"),
+              Text("firebase destribution")
             ],
           ),
         ));
