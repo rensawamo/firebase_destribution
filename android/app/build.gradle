@@ -62,7 +62,7 @@ android {
                 storePassword System.getenv()["STORE_PASSWORD"]
                 keyAlias System.getenv()["KEY_ALIAS"]
                 keyPassword System.getenv()["KEY_PASSWORD"]
-            } else if (keystorePropertiesFile.exists()) {
+            } else if (keystorePropertiesFile.exists()) { // local
                 def keystoreProperties = new Properties()
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
                 keyAlias keystoreProperties['keyAlias']
