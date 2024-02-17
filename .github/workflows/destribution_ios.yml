@@ -9,14 +9,15 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      # Checks-out our repository under $GITHUB_WORKSPACE, so our job can access it
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      # Install flutter
-      - name: Flutter get
+      - uses: actions/checkout@v1
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17.0.10
+      - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.10.1'
+          flutter-version: '3.19.0'
       - name: Decode ExportOptions
         run: echo "${{ secrets.EXPORTOPTIONS_BASE64 }}" | base64 -d > ios/Runner/ExportOptions.plist
       # Install the Apple certificate and provisioning profile
