@@ -1,0 +1,52 @@
+name: firebase destribution
+
+on:
+  push:
+    branches:
+      - 'dev'
+jobs:
+  build:
+    name: Build for iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17.0.10
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.19.0'
+      - name: Clean Flutter
+        run: flutter clean
+      - name: Flutter Doctor
+        run: flutter doctor
+      - name: Flutter Pub Get with Verbose
+        run: flutter pub get
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Decode GoogleService-Info
+        run: echo "${{ secrets.GOOGLE_SERVICE_INFO_BASE64 }}" | base64 -d > ios/Runner/GoogleService-Info.plist
+      - name: Decode firebase_option
+        run : echo "${{ secrets.FIREBASE_OPTION_BASE64 }}" | base64 -d > lib/firebase_options.dart
+      - name: Decode expoetoption
+        run: echo "${{ secrets.EXPORTOPTIONS_BASE64 }}" | base64 -d > ios/ExportOptions.plist
+      - name: Import Provisioning Profile
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo '${{ secrets.MOBILEPROVISION_BASE64 }}' | openssl base64 -d -out ~/Library/MobileDevice/Provisioning\ Profiles/decoded.mobileprovision
+
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          p12-file-base64: ${{ secrets.APPSTORE_CERT_BASE64 }}
+      - name: Build IPA
+        run: flutter build ipa
+      - name: Distribute iOS app to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.IOS_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: build/ios/ipa/firebase_destribution.ipa
