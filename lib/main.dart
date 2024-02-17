@@ -39,7 +39,7 @@ class _testState extends State<Test> {
         appBar: AppBar(
           backgroundColor: Colors.black87,
           title: const Text(
-            "AK Flutter",
+            "Flutter",
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
