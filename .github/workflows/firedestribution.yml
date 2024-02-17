@@ -19,6 +19,8 @@ jobs:
           flutter-version: '3.19.0'
       - name: Clean Flutter
         run: flutter clean
+      - name: accept andoroid for mac
+        run: flutter doctor --android-licenses
       - name: Flutter Doctor
         run: flutter doctor
       - name: Flutter Pub Get with Verbose

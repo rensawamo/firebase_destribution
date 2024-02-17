@@ -475,11 +475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.firebaseDestribution";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.firebaseDestribution;
->>>>>>> 1b45a35694ecd786814b2be82dc994617018cdca
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -658,11 +654,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.firebaseDestribution";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.firebaseDestribution;
->>>>>>> 1b45a35694ecd786814b2be82dc994617018cdca
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -685,11 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.firebaseDestribution";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.firebaseDestribution;
->>>>>>> 1b45a35694ecd786814b2be82dc994617018cdca
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
