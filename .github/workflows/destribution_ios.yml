@@ -38,7 +38,7 @@ jobs:
       - name: Flutter get
         uses: subosito/flutter-action@v1
         with:
-           flutter-version: '2.10.1'
+           flutter-version: '3.19.0'
 
       - run: flutter pub get
       - name: Building IPA
@@ -46,7 +46,6 @@ jobs:
 
       - name: collect ipa artifacts
         uses: actions/upload-artifact@v2
-        with:
 
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
