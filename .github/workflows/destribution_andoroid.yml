@@ -3,10 +3,10 @@ name: firebase destribution
 on:
   push:
     branches:
-      - 'main'
+      - 'dev'
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: set up JDK
@@ -26,17 +26,21 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Run
-        run: echo "${{ secrets.GOOGLE_SERVICE_INFO_BASE64 }}" | base64 -d > ios/Runner/GoogleService-Info.plist
+        run: echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 -d > android/app/google-services.json
+      - name: Run
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/release.jks
       - name: Decode firebase_option
         run : echo "${{ secrets.FIREBASE_OPTION_BASE64 }}" | base64 -d > lib/firebase_options.dart
-      - name: Building IOS
-        run: flutter build ios
-      - name: Building IPA
-        run: flutter build ipa
-      - name: Distribute iOS app to Firebase
+      - name: Build APK
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: flutter build apk
+      - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.IOS_APP_ID}}
+          appId: ${{secrets.ANDROID_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          file: build/ios/ipa/firebase_destribution.ipa
+          file: build/app/outputs/apk/release/app-release.apk
