@@ -109,7 +109,7 @@ app/google-services.*
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 **/ios/Runner/GoogleService-Info.plist
-
+**/ios/ExportOptions.plist
 # macOS
 **/Flutter/ephemeral/
 **/Pods/
