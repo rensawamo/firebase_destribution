@@ -34,6 +34,8 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/release.jks
       - name: Decode firebase_option
         run : echo "${{ secrets.FIREBASE_OPTION }}" | base64 -d > lib/firebase_options.dart
+      - name: Building IOS
+        run: flutter build ios
       - name: Building IPA
         run: flutter build ipa
       - name: Build APK
