@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-
 jobs:
   build:
     runs-on: macos-latest
@@ -21,7 +20,7 @@ jobs:
       - name: Clean Flutter
         run: flutter clean
       - name: Flutter Doctor
-        run: flutter doctor -v
+        run: flutter doctor
       - name: Flutter Pub Get with Verbose
         run: flutter pub get
       - name: Setup Gradle
