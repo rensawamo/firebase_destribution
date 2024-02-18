@@ -23,7 +23,7 @@ fvm use stable
 alias_nameは覚えやすい名前にする
 
 ```sh
-keytool -genkey -v -keystore release.jks -alias alias_name -keyalg RSA -keysize 2048 -validity 10000****
+keytool -genkey -v -keystore release.jks -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
 ```
 
 ### github actionの環境変数で使うためエンコードしておく
@@ -48,7 +48,12 @@ android {
 // defalutConfigの下
 signingConfigs {
         release {
-            if (keystorePropertiesFile.exists()) {
+            if (System.getenv("GITHUB_ACTIONS")) { // gitaction
+                storeFile file("release.jks")
+                storePassword System.getenv()["STORE_PASSWORD"]
+                keyAlias System.getenv()["KEY_ALIAS"]
+                keyPassword System.getenv()["KEY_PASSWORD"]
+            } else if (keystorePropertiesFile.exists()) { // local
                 def keystoreProperties = new Properties()
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
                 keyAlias keystoreProperties['keyAlias']
