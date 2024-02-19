@@ -141,6 +141,7 @@ firebase login コマンドなどを順番に実行し、プロジェクトに f
 flutter pub get
 ```
 
+
 ## github actionのセットアップ
 setting  →   Secrets and Variables   から 環境変数を設定
 
@@ -156,17 +157,6 @@ firebase login:ci
 ```
 
 
-## iosのセットアップ（MAC使用）
-
-xcodeからworkspaceを開いてteamを選択する
-
-![image](https://github.com/rensawamo/firebase_destribution/assets/106803080/5d3aae53-cdf2-4b5f-b50d-55be96c804a3)
-
-以下のコマンドをmac のターミナルから実行する
-
-```sh
-flutter build ipa
-```
 
 buildが完了したら、build/ios/ipa/ にipaファイルができていることを確認しパスをコピーして
 github actionの iosのビルドを設定する
