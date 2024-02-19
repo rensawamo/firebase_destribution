@@ -1,4 +1,4 @@
-# android ios firebase_destribution(2024/2)
+# android destribution(2024/2)
 
 ### fvm 設定で行う場合の追加
 ``` sh
