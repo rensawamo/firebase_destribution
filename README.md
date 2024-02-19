@@ -1,4 +1,4 @@
-# android ios firebase_destribution(2024/2)
+# android destribution(2024/2)
 
 ### fvm 設定で行う場合の追加
 ``` sh
@@ -48,7 +48,12 @@ android {
 // defalutConfigの下
 signingConfigs {
         release {
-            if (keystorePropertiesFile.exists()) {
+            if (System.getenv("GITHUB_ACTIONS")) { // gitaction
+                storeFile file("release.jks")
+                storePassword System.getenv()["STORE_PASSWORD"]
+                keyAlias System.getenv()["KEY_ALIAS"]
+                keyPassword System.getenv()["KEY_PASSWORD"]
+            } else if (keystorePropertiesFile.exists()) { // local
                 def keystoreProperties = new Properties()
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
                 keyAlias keystoreProperties['keyAlias']

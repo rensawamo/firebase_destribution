@@ -2,9 +2,11 @@
 name: firebase destribution
 
 on:
+
   pull_request:
     branches: [ main ]
     types: [ closed ]
+
 
 jobs:
   build:
@@ -42,7 +44,10 @@ jobs:
            flutter-version: '3.19.0'
 
       - run: flutter pub get
+      - name: Building ios
+        run: flutter build ios
       - name: Building IPA
+
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
 
       - name: collect ipa ar^\tifacts
@@ -51,12 +56,12 @@ jobs:
           name: release-ipa
           path: build/ios/ipa/*.ipa
 
+
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
             security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
             rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-
       - name: Distribute iOS app to Firebase
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
