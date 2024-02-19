@@ -2,9 +2,10 @@
 name: firebase destribution
 
 on:
-  push:
-    branches:
-      - 'main'
+  pull_request:
+    branches: [ main ]
+    types: [ closed ]
+
 jobs:
   build:
     runs-on: macos-latest
@@ -44,8 +45,11 @@ jobs:
       - name: Building IPA
         run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
 
-      - name: collect ipa artifacts
+      - name: collect ipa ar^\tifacts
         uses: actions/upload-artifact@v2
+        with:
+          name: release-ipa
+          path: build/ios/ipa/*.ipa
 
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
