@@ -20,6 +20,25 @@ fvm use stable
 **/lib/firebase_options.dart
 ```
 
+###  必要な環境変数
+GOOGLE_SERVICES_JSON_BASE64 :  firebaseのセットアップでダウンロードした google-services.json のエンコード
+
+
+- KEYSTORE_BASE64  :  release.jks(下で説明) のエンコード
+
+
+- FIREBASE_OPTION_BASE64  :  lib/の firebase_options.dart のエンコード
+
+
+- KEY_ALIAS, KEY_PASSWORD , STORE_PASSWORD   :  release.jksのパスワードやエイリアス名
+
+
+- ANDROID_APP_ID  :  firebase のandoroid アプリ名
+
+
+- CREDENTIAL_FILE_CONTENT  :  GCP トークン
+
+
 ## アップロードkeyの準備
 
 ### プロジェクトファイルの andoroi/app で以下のコマンドを実行し証明書を作成する
