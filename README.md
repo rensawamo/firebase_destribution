@@ -20,6 +20,12 @@ fvm use stable
 **/lib/firebase_options.dart
 ```
 
+### 使用する エンコードコマンド
+```sh
+$ base64 -i input.xxx  -o output.pem 
+```
+
+
 ###  必要な環境変数
 GOOGLE_SERVICES_JSON_BASE64 :  firebaseのセットアップでダウンロードした google-services.json のエンコード
 
