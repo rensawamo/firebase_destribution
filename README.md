@@ -2,6 +2,9 @@
 
 ### fvm 設定で行う場合の追加
 ``` sh
+fvm list
+fvm use (上記ver)
+or
 fvm use stable
 ```
 
@@ -31,7 +34,7 @@ keytool -genkey -v -keystore release.jks -alias alias_name -keyalg RSA -keysize 
  openssl base64 -in release.jks  -out release.pem 
 ```
 
-### android/keystore.propertiesを作成
+### android/keystore.propertiesを作成（local用）
 ```sh
 storePassword=パスワード
 keyPassword=パスワード
@@ -48,12 +51,12 @@ android {
 // defalutConfigの下
 signingConfigs {
         release {
-            if (System.getenv("GITHUB_ACTIONS")) { // gitaction
+            if (System.getenv("GITHUB_ACTIONS")) { // gitaction用
                 storeFile file("release.jks")
                 storePassword System.getenv()["STORE_PASSWORD"]
                 keyAlias System.getenv()["KEY_ALIAS"]
                 keyPassword System.getenv()["KEY_PASSWORD"]
-            } else if (keystorePropertiesFile.exists()) { // local
+            } else if (keystorePropertiesFile.exists()) { // local用
                 def keystoreProperties = new Properties()
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
                 keyAlias keystoreProperties['keyAlias']
@@ -72,12 +75,10 @@ buildTypes {
 
 ```
 
-### 以下コマンドを実行
+### 以下コマンドを実行(local apkファイルの出力の確認)
 ```sh
 flutter build apk
 ```
-
-
 
 
 ## firebase 導入
@@ -141,23 +142,14 @@ firebase login コマンドなどを順番に実行し、プロジェクトに f
 flutter pub get
 ```
 
+###  firebase  distribution との接続トークンの発行
 
-## github actionのセットアップ
-setting  →   Secrets and Variables   から 環境変数を設定
+https://github.com/wzieba/Firebase-Distribution-Github-Action/wiki/FIREBASE_TOKEN-migration#guide-2---the-same-but-with-screenshots
 
-![image](https://github.com/rensawamo/firebase_destribution/assets/106803080/0f604f02-00ea-442c-a70c-cff2d87c555a)
-
-- APPID   ＝ firebaseの アプリID
-- FIREBASE_OPTIONS  ＝ lib/firebase_options.dartの内容
-- GOOGLE_SERVICES_JSON  ＝ android/app/google-services.jsonの内容
-- TOKEN  ＝ 
-以下のコマンドを実行したときの+  Success! Use this token to login on a CI server: の下がTokenとなる
+以下のコマンドは、現在では非推奨。
 ```sh
 firebase login:ci
 ```
 
 
-
-buildが完了したら、build/ios/ipa/ にipaファイルができていることを確認しパスをコピーして
-github actionの iosのビルドを設定する
 
